@@ -54,7 +54,8 @@ class GalloryController extends Controller
      */
     public function edit(Gallory $gallory)
     {
-        //
+
+        return view('Gallory.galleryEdite', compact('gallory'));
     }
 
     /**
@@ -62,7 +63,19 @@ class GalloryController extends Controller
      */
     public function update(Request $request, Gallory $gallory)
     {
-        //
+        $data = ['name' => $request->name];
+
+        // Only replace image if a new one was uploaded
+        if ($request->hasFile('image')) {
+            // Delete old image
+            Storage::disk('public')->delete($gallory->image);
+            // Store new image
+            $data['image'] = $request->file('image')->store('gallery', 'public');
+        }
+
+        $gallory->update($data);
+
+        return redirect()->route('gallory.store')->with('success', 'Image updated');
     }
 
     /**
@@ -71,9 +84,8 @@ class GalloryController extends Controller
     public function destroy(Gallory $gallory)
     {
         // delete image from storage
-        if ($gallory->image && Storage::disk('public')->exists($gallory->image)) {
-            Storage::disk('public')->delete($gallory->image);
-        }
+
+        Storage::disk('public')->delete($gallory->image);
 
         // delete record from database
         $gallory->delete();

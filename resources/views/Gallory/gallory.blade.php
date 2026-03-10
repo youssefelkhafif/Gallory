@@ -73,6 +73,21 @@
                                             Remove
                                         </button>
                                     </form>
+
+                                    <form action="{{ route('gallory.edit', $image->id) }}" class="mt-3">
+                                        @csrf
+                                        
+                                        <button type="submit"
+                                            class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold
+                                        bg-white/10 border border-white/10 text-white backdrop-blur-sm
+                                        hover:bg-green-500/30 hover:border-green-500/40 transition-all duration-200">
+                                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z" />
+                                            </svg>
+                                            Edite
+                                        </button>
+                                    </form>
                                 </div>
                             </div>
 
